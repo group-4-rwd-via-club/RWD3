@@ -7,8 +7,7 @@ $(document).ready(function () {
 	onHover('#fish2Id');
 	animateBubbles('#bubble1Id');
 	animateBubbles('#bubble2Id');
-	animateBubbles('#bubble3Id');
-	clickfish('#fish1Id');
+	animateBubbles('#bubble3Id'); 
 	dblclickfish('#fish1Id');
 });
 
@@ -122,28 +121,51 @@ function onHover(itemId) {
 }
 
 //orange fish
-function clickfish(itemId) {
-	var img = $(itemId);
-	var iw = img.width();
-	var ih = img.height();
-
-	$(img).click(function (event) {
-		img.css({
-			left: Math.floor(event.pageX - iw / 2),
-			top: Math.floor(event.pageY - ih / 2)
-		});
-	});
-}
+ 
 
 function dblclickfish(itemId) {
 	var img = $(itemId);
 
 	$(img).dblclick(function () {
 		img.css({
-			transform: "scale(2)"
+			transform: "scale(1.5)"
 		});
-		$(img).delay(3000).css({
-			transform: "scale(1)"
-		});
+		setTimeout(function () {
+			img.css({
+				transform: "scale(1)"
+			});
+		}, 1000);
 	})
 }
+$(document).click(function (event) {
+    $("#fish1Id").stop(true);
+    $("#fish1Id").animate({left: event.pageX - 100, top: event.pageY - 100}, 700, function() {
+		animateRandom('#fish1Id', false);
+	});
+});
+
+//orange fish double click zoom(JH)
+//$("#fish1Id").dblclick(function () {
+//	
+//    $(this).stop(true).animate({width: 400, height: 400}, 2500, function () {
+//			$(this).animate({width: 250, height: 250}, 2500, function() {
+//				animateRandom('#fish1Id', false);
+//			});
+//		// perhaps setTimeout can be used? google it
+//	});
+//
+//
+//}); 
+
+// double click event fish1
+//function dblclickfish(itemId) {
+//	
+//	// stop all current animations and animate width, height
+//    $(this).stop(true).animate({width: 400, height: 400});
+//	// set a timer for 2500 ms.
+//	
+//    setTimeout(function () {   
+//		$(itemId).animate({width: 250, height: 250}, 500);		
+//    }, 2500);
+//	
+//};
