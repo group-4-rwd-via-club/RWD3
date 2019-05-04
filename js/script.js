@@ -142,11 +142,8 @@ function dblclickfish(itemId) {
 		img.css({
 			transform: "scale(2)"
 		});
-		setTimeout(function () {
-			img.css({
-				transform: "scale(1)"
-			});
-
-		}, 1500);
+		$(img).delay(3000).css({
+			transform: "scale(1)"
+		});
 	})
 }
