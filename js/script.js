@@ -127,14 +127,12 @@ function dblclickfish(itemId) {
 	var img = $(itemId);
 
 	$(img).dblclick(function () {
-		img.css({
-			transform: "scale(1.5)"
-		});
+		img.animate({"height": "400px", "width": "400px"});
 		setTimeout(function () {
-			img.css({
-				transform: "scale(1)"
+			img.animate({
+				"height":"250px","width":"250px"
 			});
-		}, 1000);
+		}, 300);
 	})
 }
 $(document).click(function (event) {
