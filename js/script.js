@@ -1,13 +1,14 @@
 /*globals $:false, window:false, document:false */
 
 // Start animations upon load
-$(document).ready(function(){
-    animateRandom('#fish1Id', false);
-    animateRandom('#fish2Id', false);
-    onHover('#fish2Id');
-    animateBubbles('#bubble1Id');
-    animateBubbles('#bubble2Id');
-    animateBubbles('#bubble3Id');
+$(document).ready(function () {
+	animateRandom('#fish1Id', false);
+	animateRandom('#fish2Id', false);
+	onHover('#fish2Id');
+	animateBubbles('#bubble1Id');
+	animateBubbles('#bubble2Id');
+	animateBubbles('#bubble3Id'); 
+	dblclickfish('#fish1Id');
 });
 
 
@@ -23,40 +24,45 @@ $(document).ready(function(){
 /// at a random entry point in the bottom of the screen.
 
 var bubbleAnimationTime = 10000;
-function animateBubbles(itemId){
-    
-    
-    
-    var sw = getRandomStartPosBottom(itemId);
-    var sh = $(window).height();
-    $(itemId).offset({top: sh, left: sw})
-    $(itemId).animate({ top: -100}, bubbleAnimationTime,   function(){
-        //rerun the animation
-        animateBubbles(itemId);        
-    }).click(function(){
-        // stop animations and start fadeout
-        $(itemId).stop();
-        $(itemId).fadeOut(400, function(){
-            // make sure every animation is stopped before contineuing 
-            // this removes a ms delay in the animation
-            $(itemId).stop(true);
-            // make sure it is faded in again before start
-            $(itemId).fadeIn(1);
-            animateBubbles(itemId);
-        });
 
-        
-    });
+function animateBubbles(itemId) {
+
+
+
+	var sw = getRandomStartPosBottom(itemId);
+	var sh = $(window).height();
+	$(itemId).offset({
+		top: sh,
+		left: sw
+	})
+	$(itemId).animate({
+		top: -100
+	}, bubbleAnimationTime, function () {
+		//rerun the animation
+		animateBubbles(itemId);
+	}).click(function () {
+		// stop animations and start fadeout
+		$(itemId).stop();
+		$(itemId).fadeOut(400, function () {
+			// make sure every animation is stopped before contineuing 
+			// this removes a ms delay in the animation
+			$(itemId).stop(true);
+			// make sure it is faded in again before start
+			$(itemId).fadeIn(1);
+			animateBubbles(itemId);
+		});
+
+
+	});
 }
 
 
 
-function getRandomStartPosBottom(itemId)
-{
-    var offsetW = $(itemId).innerWidth();
-    var w = $(window).width() - offsetW;
-    var nw = Math.floor(Math.random() * w);
-    return nw;
+function getRandomStartPosBottom(itemId) {
+	var offsetW = $(itemId).innerWidth();
+	var w = $(window).width() - offsetW;
+	var nw = Math.floor(Math.random() * w);
+	return nw;
 }
 
 
@@ -69,44 +75,95 @@ function getRandomStartPosBottom(itemId)
 
 // Returns random position within window screen minus
 // items height and width.
-function moveToRandomPosition(dx, dy){
-    
-    // dx dy makes sure items move within screen window
-    var h = $(window).height() - dy;
-    var w = $(window).width() - dx;
-    
-    var nh = Math.floor(Math.random() * h);
-    var nw = Math.floor(Math.random() * w);
-    
-    return [nh,nw];    
-    
+function moveToRandomPosition(dx, dy) {
+
+	// dx dy makes sure items move within screen window
+	var h = $(window).height() - dy;
+	var w = $(window).width() - dx;
+
+	var nh = Math.floor(Math.random() * h);
+	var nw = Math.floor(Math.random() * w);
+
+	return [nh, nw];
+
 }
 // variable to set movespeed of the fish
 var fishMovementTime = 10000;
 // Randomly moves the item
-function animateRandom(itemId, fast){
+function animateRandom(itemId, fast) {
 
-    var fishSpeed = fishMovementTime;
-    if (fast){
-        fishSpeed = 500;
-    }
-    // get items height and width.
-    var x = $(itemId).innerWidth();
-    var y = $(itemId).innerHeight();
-    // get random pos as x,y array.
-    var newPos = moveToRandomPosition(x,y);
-    $(itemId).animate({ top: newPos[0], left: newPos[1] }, fishSpeed,   function(){
-        //rerun the animation
-        animateRandom(itemId, false);        
-    });
-    
+	var fishSpeed = fishMovementTime;
+	if (fast) {
+		fishSpeed = 500;
+	}
+	// get items height and width.
+	var x = $(itemId).innerWidth();
+	var y = $(itemId).innerHeight();
+	// get random pos as x,y array.
+	var newPos = moveToRandomPosition(x, y);
+	$(itemId).animate({
+		top: newPos[0],
+		left: newPos[1]
+	}, fishSpeed, function () {
+		//rerun the animation
+		animateRandom(itemId, false);
+	});
+
 }
 
-function onHover(itemId){
-    $(itemId).mouseover(function(){
-        $(itemId).stop(true);
-        animateRandom(itemId, true);
+function onHover(itemId) {
+	$(itemId).mouseover(function () {
+		$(itemId).stop(true);
+		animateRandom(itemId, true);
 
-        
-    })
+
+	})
 }
+
+//orange fish
+ 
+
+function dblclickfish(itemId) {
+	var img = $(itemId);
+
+	$(img).dblclick(function () {
+		img.animate({"height": "400px", "width": "400px"});
+		setTimeout(function () {
+			img.animate({
+				"height":"250px","width":"250px"
+			});
+		}, 690);
+	})
+}
+$(document).click(function (event) {
+    $("#fish1Id").stop(true);
+    $("#fish1Id").animate({left: event.pageX - 100, top: event.pageY - 100}, 700, function() {
+		animateRandom('#fish1Id', false);
+	});
+});
+
+//orange fish double click zoom(JH)
+//$("#fish1Id").dblclick(function () {
+//	
+//    $(this).stop(true).animate({width: 400, height: 400}, 2500, function () {
+//			$(this).animate({width: 250, height: 250}, 2500, function() {
+//				animateRandom('#fish1Id', false);
+//			});
+//		// perhaps setTimeout can be used? google it
+//	});
+//
+//
+//}); 
+
+// double click event fish1
+//function dblclickfish(itemId) {
+//	
+//	// stop all current animations and animate width, height
+//    $(this).stop(true).animate({width: 400, height: 400});
+//	// set a timer for 2500 ms.
+//	
+//    setTimeout(function () {   
+//		$(itemId).animate({width: 250, height: 250}, 500);		
+//    }, 2500);
+//	
+//};
