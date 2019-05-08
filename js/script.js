@@ -1,13 +1,14 @@
 /*globals $:false, window:false, document:false */
 
 // Start animations upon load
-$(document).ready(function(){
+$(document).ready(function () {
     animateRandom('#fish1Id', false);
     animateRandom('#fish2Id', false);
     onHover('#fish2Id');
     animateBubbles('#bubble1Id');
     animateBubbles('#bubble2Id');
     animateBubbles('#bubble3Id');
+	setCanvasSize();
 });
 
 
@@ -22,10 +23,10 @@ $(document).ready(function(){
 /// in a fading manner, but will immediately after reappear 
 /// at a random entry point in the bottom of the screen.
 
-var bubbleAnimationTime = 10000;
-function animateBubbles(itemId){
+
+function animateBubbles(itemId) {
     
-    
+    var bubbleAnimationTime = getRandomArbitrary(3000, 10000)
     
     var sw = getRandomStartPosBottom(itemId);
     var sh = $(window).height();
@@ -49,7 +50,9 @@ function animateBubbles(itemId){
     });
 }
 
-
+function getRandomArbitrary(min, max) {
+  return Math.random() * (max - min) + min;
+}
 
 function getRandomStartPosBottom(itemId)
 {
