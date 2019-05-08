@@ -132,7 +132,7 @@ function dblclickfish(itemId) {
 			img.animate({
 				"height":"250px","width":"250px"
 			});
-		}, 300);
+		}, 690);
 	})
 }
 $(document).click(function (event) {
