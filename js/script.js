@@ -8,7 +8,7 @@ $(document).ready(function () {
 	animateBubbles('#bubble1Id');
 	animateBubbles('#bubble2Id');
 	animateBubbles('#bubble3Id'); 
-    $('#bubbleId4').hide();
+    $('#bubble4Id').hide();
 	dblclickfish('#fish1Id');
 });
 
@@ -168,7 +168,7 @@ $(document).click(function (event) {
 //	
 //};
 
-
+/*
 /// HUGH
 
 // NOTE: Still working on animate small Bubbles
@@ -204,7 +204,7 @@ function getQuarterRSPB(itemClass, quarterIndex) {
     var qw = Math.floor($(window).width() * 0.25);
     var nw = (qw * quarterIndex) + Math.floor(Math.random() * (qw - offsetW));
     return nw;
-
+*/
 // Orange fish bobble 
 function smallBubble (){
    $("#bubble4Id").width(25).height(25).stop(true).stop(false).offset({top: $("#fish1Id").position().top + 100, left: $("#fish1Id").position().left + 50 }).fadeIn().animate({top: -100}, bubbleAnimationTime);
