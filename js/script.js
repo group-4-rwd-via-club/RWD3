@@ -27,14 +27,14 @@ $(document).ready(function () {
 var bubbleAnimationTime = 10000;
 
 function animateBubbles(itemId) {
-    
+    var size = getRandomBubbleSize();
 	var sw = getRandomStartPosBottom(itemId);
 	var sh = $(window).height();
 	$(itemId).offset({
 		top: sh,
 		left: sw
 	})
-	$(itemId).animate({
+	$(itemId).height(size).width(size).animate({
 		top: -100
 	}, bubbleAnimationTime, function () {
 		//rerun the animation
@@ -64,7 +64,10 @@ function getRandomStartPosBottom(itemId) {
 	return nw;
 }
 
-
+function getRandomBubbleSize() {
+	var size = Math.floor(Math.random() * 95) + 5;
+	return size;
+}
 /// OBJECT: BOTH FISH
 /// Behavior: When a fish is not otherwise being interacted with,
 /// it will slowly move around in random directions on its own. 
