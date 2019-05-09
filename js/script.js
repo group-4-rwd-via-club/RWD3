@@ -169,6 +169,42 @@ $(document).click(function (event) {
 //};
 
 
+/// HUGH
+
+// NOTE: Still working on animate small Bubbles
+
+// add to document at top of script
+	animateSmlBubble('#smlBubbleClass', 0);
+    animateSmlBubble('#smlBubbleClass', 1);
+    animateSmlBubble('#smlBubbleClass', 2);
+    animateSmlBubble('#smlBubbleClass', 3);
+// !! OR INSTEAD !!
+//not sure if will work, cannot test until function complete
+	for (i = 0; i < 4 ; i++) {
+		animateSmlBubble('#smlBubbleClass', i);
+	}
+
+/// OBJECT: SMALL BUBBLES
+var smlBubbleSpeed = animateBubbles 
++ Math.floor((Math.random() - 0.5) * animateBubbles * 0.5);
+
+function animateSmlBubble(itemClass, quarterIndex){
+    var sw = getQuarterRSPB(itemClass, q);
+    var sh = $(window).height();
+    // section will create 4 bubbles randomly each
+    for (i = 0; i < 4 ; i++) {
+    	$(itemClass).offset({top: sh, left sw})
+    $(itemId).delay(100 * Math.random()).animate({
+    	top: -100}, smlBubbleSpeed, )
+    }
+}
+
+function getQuarterRSPB(itemClass, quarterIndex) {
+    var offsetW = $(itemClass).innerWidth();
+    var qw = Math.floor($(window).width() * 0.25);
+    var nw = (qw * quarterIndex) + Math.floor(Math.random() * (qw - offsetW));
+    return nw;
+
 // Orange fish bobble 
 function smallBubble (){
    $("#bubble4Id").width(25).height(25).stop(true).stop(false).offset({top: $("#fish1Id").position().top + 100, left: $("#fish1Id").position().left + 50 }).fadeIn().animate({top: -100}, bubbleAnimationTime);
