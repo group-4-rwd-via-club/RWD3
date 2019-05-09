@@ -8,6 +8,7 @@ $(document).ready(function () {
 	animateBubbles('#bubble1Id');
 	animateBubbles('#bubble2Id');
 	animateBubbles('#bubble3Id'); 
+    $('#bubbleId4').hide();
 	dblclickfish('#fish1Id');
 });
 
@@ -26,9 +27,7 @@ $(document).ready(function () {
 var bubbleAnimationTime = 10000;
 
 function animateBubbles(itemId) {
-
-
-
+    
 	var sw = getRandomStartPosBottom(itemId);
 	var sh = $(window).height();
 	$(itemId).offset({
@@ -140,6 +139,7 @@ $(document).click(function (event) {
     $("#fish1Id").animate({left: event.pageX - 100, top: event.pageY - 100}, 700, function() {
 		animateRandom('#fish1Id', false);
 	});
+    smallBubble();
 });
 
 //orange fish double click zoom(JH)
@@ -167,3 +167,9 @@ $(document).click(function (event) {
 //    }, 2500);
 //	
 //};
+
+
+// Orange fish bobble 
+function smallBubble (){
+   $("#bubble4Id").width(25).height(25).stop(true).stop(false).offset({top: $("#fish1Id").position().top + 100, left: $("#fish1Id").position().left + 50 }).fadeIn().animate({top: -100}, bubbleAnimationTime);
+}
