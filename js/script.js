@@ -27,7 +27,7 @@ $(document).ready(function () {
 var bubbleAnimationTime = 10000;
 
 function animateBubbles(itemId) {
-    var size = getRandomBubbleSize();
+    var size = getRandomBubbleSize(95);
 	var sw = getRandomStartPosBottom(itemId);
 	var sh = $(window).height();
 	$(itemId).offset({
@@ -64,8 +64,8 @@ function getRandomStartPosBottom(itemId) {
 	return nw;
 }
 
-function getRandomBubbleSize() {
-	var size = Math.floor(Math.random() * 95) + 5;
+function getRandomBubbleSize(maxSize) {
+	var size = Math.floor(Math.random() * maxSize) + 5;
 	return size;
 }
 /// OBJECT: BOTH FISH
@@ -210,5 +210,6 @@ function getQuarterRSPB(itemClass, quarterIndex) {
 */
 // Orange fish bobble 
 function smallBubble (){
-   $("#bubble4Id").width(25).height(25).stop(true).stop(false).offset({top: $("#fish1Id").position().top + 100, left: $("#fish1Id").position().left + 50 }).fadeIn().animate({top: -100}, bubbleAnimationTime);
+     var size = getRandomBubbleSize(30);
+   $("#bubble4Id").width(size).height(size).stop(true).stop(false).offset({top: $("#fish1Id").position().top + 100, left: $("#fish1Id").position().left + 50 }).fadeIn().animate({top: -100}, bubbleAnimationTime);
 }
