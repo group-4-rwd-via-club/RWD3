@@ -85,10 +85,22 @@ function animateRandom(itemId, fast) {
     var y = $(itemId).innerHeight();
     // get random pos as x,y array.
     var newPos = moveToRandomPosition(x, y);
+    if ($(itemId).position().left > newPos[0]) {
+        $(itemId).addClass('flip');
+    }
+    if ($(itemId).position().left < newPos[0]) {
+        $(itemId).removeClass('flip');
+    }
     $(itemId).animate({
         top: newPos[0]
         , left: newPos[1]
     }, fishSpeed, function () {
+        if ($(itemId).position().left > newPos[0]) {
+            $(itemId).addClass('flip');
+        }
+        if ($(itemId).position().left < newPos[0]) {
+            $(itemId).removeClass('flip');
+        }
         //rerun the animation
         animateRandom(itemId, false);
     });
@@ -118,6 +130,12 @@ function dblclickfish(itemId) {
 }
 $(document).click(function (event) {
     $("#fish1Id").stop(true);
+    if ($("#fish1Id").position().left > event.pageX) {
+        $("#fish1Id").addClass('flip');
+    }
+    if ($("#fish1Id").position().left < event.pageX) {
+        $("#fish1Id").removeClass('flip');
+    }
     $("#fish1Id").animate({
         left: event.pageX - 100
         , top: event.pageY - 100
