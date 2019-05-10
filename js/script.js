@@ -1,4 +1,4 @@
-    /*globals $:false, window:false, document:false */
+/*globals $:false, window:false, document:false */
 // Start animations upon load
 $(document).ready(function () {
     animateRandom('#fish1Id', false);
