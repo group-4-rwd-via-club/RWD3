@@ -11,13 +11,6 @@ $(document).ready(function () {
     dblclickfish('#fish1Id');
 });
 /// OBJECT: THREE BUBBLES
-/// Behavior: Each bubble moves into the view of the aquarium from the 
-/// bottom of the screen and exits in the top. 
-/// When a bubble moves out of view in the top it will enter anew in 
-/// the bottom. Where it will enter will be random. 
-/// In addition, when you click on a bubble, it will disappear 
-/// in a fading manner, but will immediately after reappear 
-/// at a random entry point in the bottom of the screen.
 var bubbleAnimationTime = 10000;
 
 function animateBubbles(itemId) {
@@ -59,11 +52,6 @@ function getRandomBubbleSize(maxSize, minSize) {
     return size;
 }
 /// OBJECT: BOTH FISH
-/// Behavior: When a fish is not otherwise being interacted with,
-/// it will slowly move around in random directions on its own. 
-/// It will never move outside of the aquarium view though.
-// Returns random position within window screen minus
-// items height and width.
 function moveToRandomPosition(dx, dy) {
     // dx dy makes sure items move within screen window
     var h = $(window).height() - dy;
@@ -85,6 +73,12 @@ function animateRandom(itemId, fast) {
     var y = $(itemId).innerHeight();
     // get random pos as x,y array.
     var newPos = moveToRandomPosition(x, y);
+    if ($(itemId).position().left > newPos[1]) {
+        $(itemId).addClass('flip');
+    }
+    if ($(itemId).position().left < newPos[1]) {
+        $(itemId).removeClass('flip');
+    }
     $(itemId).animate({
         top: newPos[0]
         , left: newPos[1]
@@ -102,22 +96,22 @@ function onHover(itemId) {
 }
 //orange fish
 function dblclickfish(itemId) {
-    var img = $(itemId);
-    $(img).dblclick(function () {
-        img.animate({
+    $(itemId).dblclick(function () {
+        $(itemId).animate({
             "height": "400px"
             , "width": "400px"
         });
-        setTimeout(function () {
-            img.animate({
-                "height": "250px"
-                , "width": "250px"
-            });
-        }, 690);
+        $(itemId).setTimeout(function () {$(itemId).animate({"height": "250px", "width": "250px"});}, 690);
     })
 }
 $(document).click(function (event) {
     $("#fish1Id").stop(true);
+    if ($("#fish1Id").position().left > event.pageX) {
+        $("#fish1Id").addClass('flip');
+    }
+    if ($("#fish1Id").position().left < event.pageX) {
+        $("#fish1Id").removeClass('flip');
+    }
     $("#fish1Id").animate({
         left: event.pageX - 100
         , top: event.pageY - 100
